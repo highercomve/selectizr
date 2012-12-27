@@ -19,7 +19,7 @@ if ( typeof Object.create !== 'function' ) {
   var SelectizrBuilder = {
 
     init: function(options, elem) {
-      var self = this;
+      var self = this; // guarda un cache de objeto para no confundirlo con el this de jQuery
 
       self.values = "";
       self.options = $.extend( {}, $.fn.selectizr.options, options );
@@ -32,22 +32,23 @@ if ( typeof Object.create !== 'function' ) {
     },
 
     eventInit: function() {
-      var self = this;
+      var self = this;  // guarda un cache de objeto para no confundirlo con el this de jQuery
       self.addMore();
       self.saveEvent();
     },
 
     firstDisplay: function() {
-      var self = this;
+      var self = this; // guarda un cache de objeto para no confundirlo con el this de jQuery
       
       self.inners_fields = $('<div></div>', { class: "inners-fields" })
         .append($('<a></a>', { text: "Agregar opcion", class: "more-button" }))
+        .append($('<a></a>', { text: "Guardar Opciones", class: "save-button" }))
         .insertAfter(self.field);
       console.log(self.inners_fields);
     },
 
     addMore: function() {
-      var self = this;
+      var self = this; // guarda un cache de objeto para no confundirlo con el this de jQuery
       self.field_parent.on('click', '.more-button', function (){
         console.log('agregando campo');
         self.addField();
@@ -55,25 +56,36 @@ if ( typeof Object.create !== 'function' ) {
     },
     
     addField: function() {
-      var self = this,
+      var self = this, // guarda un cache de objeto para no confundirlo con el this de jQuery
           template = "<div class='option-container'>\
                         <span type='text' class='option-field' contenteditable='true'>New Option</span>\
                         <input type='checkbox' class='option-field-correct' value='true'/>Correct?\
-                        <a href='#' class='iconos edit-icon edit-option'>Edit</a>\
-                        <a href='#' class='iconos save-icon save-option'>Save</a>\
                       </div>";
       $(template).appendTo(self.inners_fields);
     },
 
     saveEvent: function() {
-      self = this;
-      self.field_parent.on('click', '.save-option', function(){
-        self.saveField(this);
+      self = this; // guarda un cache de objeto para no confundirlo con el this de jQuery
+      self.field_parent.on('click', '.save-button', function(){
+        self.saveFields();
       });
     },
 
-    saveField: function(element) {
-      var self = this,
+    saveFields: function() {
+      var self = this, // guarda un cache de objeto para no confundirlo con el this de jQuery
+          options = new Array();
+      
+      self.field_parent.find(".option-container").each(function () {
+        var $this = $(this),
+            content = $this.find('.option-field').html(),
+            correct = $this.find('.option-field-correct:checked').val();
+
+        correct = (correct === undefined) ? false:true;
+        options.push( "{option:"+content+",correct:"+correct+"}" );
+      });
+
+      self.field.val(options);
+      /* Reescribir todo este modulo para que tome todas las opciones y la actualiza en el campo optionss
           $element = $(element),
           $parent = $element.parent('.option-container'),
           $options = 
@@ -81,11 +93,8 @@ if ( typeof Object.create !== 'function' ) {
           correct = $parent.find('.option-field-correct:checked').val();
     
         correct = (correct === undefined) ? false:true;
-        console.log("contenido: "+content+" correcto"+correct);
-    },
-    processValues: function() {
-      var self = this;
-      
+      */
+      console.log("contenido: "+content+" correcto"+correct);
     }
   };
 
