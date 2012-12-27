@@ -1,0 +1,61 @@
+/*
+Plugin Name: Selectizr
+Description: Selectizr is a plugin to autofill a text field with options for one question
+Author: highercomve (Sergio Marin)
+license: MIT
+*/
+
+.dynamic-field {
+
+}
+
+.dynamic-field .options-field {
+
+}
+.dynamic-field .inners-fields {
+  display: block;
+  margin: 20px 0;
+}
+.dynamic-field .inners-fields .more-button,
+.dynamic-field .inners-fields .save-button {
+  display: inline-block;
+  background-color: #E9E9E9;
+  border-radius: 5px;
+  box-shadow: 0 1px 2px 0 #B6B4B4;
+  cursor: pointer;
+  color: #2D2D2D;
+  text-shadow: 0 1px 0 #B9B9B9;
+  margin: 0 10px;
+  padding: 10px 20px;
+}
+.dynamic-field .inners-fields .option-container {
+  margin: 20px 10px;
+}
+
+.dynamic-field .inners-fields .more-button {
+
+}
+.dynamic-field .inners-fields .save-button {
+  
+}
+.dynamic-field .inners-fields .option-field {
+  display: inline-block;
+  margin-right: 10px;
+  padding: 10px 20px;
+  background-color: white;
+  border: 1px solid #DEDEDE;  
+  box-shadow: 0 1px 1px 0 #B9B9B9;
+  border-radius: 5px;
+  min-width: 250px;
+}
+.dynamic-field .inners-fields .option-field-correct {
+  position: relative;
+  top: 5px;
+  display: inline-block;
+  padding: 10px;
+  width: 20px;
+  height: 20px;
+  background: white;
+  box-shadow: 0 1px 1px 0 #D0D0D0;
+  margin-right: 5px;
+}
